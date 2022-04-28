@@ -60,7 +60,7 @@
 
         android:hint="username"
         app:boxStrokeWidth="1dp"
-        app:startIconDrawable="@drawable/ic_lock"
+        app:startIconDrawable="@drawable/ic_email"
         app:startIconTint="#00C853">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -82,6 +82,7 @@
         android:hint="Password"
         app:boxStrokeWidth="1dp"
         app:startIconDrawable="@drawable/ic_lock"
+        app:passwordToggleEnabled="true"
         app:startIconTint="#00C853">
 
         <com.google.android.material.textfield.TextInputEditText
