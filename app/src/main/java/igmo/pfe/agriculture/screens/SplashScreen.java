@@ -14,14 +14,15 @@ public class SplashScreen extends AppCompatActivity {
 
     public static SplashScreen inst ;
 
-    public SplashScreen (){
-        inst=this;
-    }
+    public SplashScreen (){ inst=this; }
+
+
      private User userData ;
 
     public static SplashScreen getInst(){
         return inst;
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,8 @@ public class SplashScreen extends AppCompatActivity {
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
             }
-        }, 3000);
+        }, 2000);
+
 
     }
 
