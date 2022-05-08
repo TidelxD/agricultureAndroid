@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                User helper = new User(response.body().getUsername(),response.body().getUsername());
+                User helper = new User(response.body().getUsername(),response.body().getToken());
                 inst.setUserData(helper);
                 Toast.makeText(MainActivity.this,response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, DashboardActivity.class);

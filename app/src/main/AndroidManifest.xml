@@ -14,6 +14,9 @@
         android:theme="@style/Theme.Agriculture"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".screens.EnvirementStatusActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
