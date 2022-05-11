@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/K-A-G-D/PGM/Merad/agriculture/app/src/main/res/drawable/ic_email.xml" value="0.1725" />
+        <entry key="..\:/K-A-G-D/PGM/Merad/agriculture/app/src/main/res/drawable/ic_engine.xml" value="0.1645" />
         <entry key="..\:/K-A-G-D/PGM/Merad/agriculture/app/src/main/res/drawable/ic_history.xml" value="0.1725" />
         <entry key="..\:/K-A-G-D/PGM/Merad/agriculture/app/src/main/res/drawable/ic_humidity.xml" value="0.1475" />
         <entry key="..\:/K-A-G-D/PGM/Merad/agriculture/app/src/main/res/drawable/ic_lock.xml" value="0.1725" />
@@ -18,6 +19,7 @@
         <entry key="..\:/K-A-G-D/PGM/Merad/agriculture/app/src/main/res/layout/activity_dashboard.xml" value="0.25" />
         <entry key="..\:/K-A-G-D/PGM/Merad/agriculture/app/src/main/res/layout/activity_envirement_status.xml" value="0.25" />
         <entry key="..\:/K-A-G-D/PGM/Merad/agriculture/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/K-A-G-D/PGM/Merad/agriculture/app/src/main/res/layout/activity_remote_control.xml" value="0.22" />
         <entry key="..\:/K-A-G-D/PGM/Merad/agriculture/app/src/main/res/layout/activity_splash_screen.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/wikov/AndroidStudioProjects/agricultureAndroid/app/src/main/res/drawable/ic_lock.xml" value="0.1" />
         <entry key="..\:/Users/wikov/AndroidStudioProjects/agricultureAndroid/app/src/main/res/drawable/ic_menu.xml" value="0.1" />

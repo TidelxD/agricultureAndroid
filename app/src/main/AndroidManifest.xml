@@ -14,16 +14,17 @@
         android:theme="@style/Theme.Agriculture"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".screens.RemoteControlActivity"
+            android:exported="false" />
+        <activity
             android:name=".screens.EnvirementStatusActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-
         <activity
             android:name=".screens.DashboardActivity"
             android:exported="false" />
-
         <activity
             android:name=".screens.SplashScreen"
             android:exported="true">
