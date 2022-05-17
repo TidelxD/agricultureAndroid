@@ -60,7 +60,7 @@ public class EnvirementStatusActivity extends AppCompatActivity {
                 humiValue.setText(response.body().getHumidity()+"%");
                 WindValue.setText(response.body().getWindSpeed()+"km/h");
                 soilValue.setText(response.body().getSoilmoaster()+"%");
-                timesValue.setText(response.body().getTimestamp());
+                timesValue.setText(response.body().getTimestamp()+"");
 
 
             }

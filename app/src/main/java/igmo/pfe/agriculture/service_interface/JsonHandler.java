@@ -30,4 +30,7 @@ public interface JsonHandler {
 
     @GET("getLastActutor")
     Call<List<Actutors>>getLastActutor(@Header("Authorization") String token);
+
+    @GET("getLastDataSensors")
+    Call<Sensors>getLastSendors(@Header("Authorization") String token);
 }

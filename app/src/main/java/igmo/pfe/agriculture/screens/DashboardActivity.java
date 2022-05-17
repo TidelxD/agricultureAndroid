@@ -10,7 +10,7 @@ import android.view.View;
 import igmo.pfe.agriculture.R;
 
 public class DashboardActivity extends AppCompatActivity {
-     private CardView Environment,RemoteControll;
+     private CardView Environment,RemoteControll,StatisticsActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +18,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         Environment=findViewById(R.id.Environment);
         RemoteControll=findViewById(R.id.Remote);
+        StatisticsActivity=findViewById(R.id.StatisticsActivity);
 
         Environment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,6 +30,12 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(DashboardActivity.this,RemoteControlActivity.class));
+            }
+        });
+        StatisticsActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardActivity.this,StatisicsAcivity.class));
             }
         });
 

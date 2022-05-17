@@ -20,7 +20,7 @@ public class Sensors {
     @SerializedName("y")
     private float y ;
     @SerializedName("timestamp")
-    private String timestamp ;
+    private double timestamp ;
     @SerializedName("success")
     private int success;
     @SerializedName("message")
@@ -45,7 +45,7 @@ public class Sensors {
     public Sensors() {
     }
 
-    public Sensors(int id, float tempurature, float humidity, float soilmoaster, float windSpeed, float x, float y, String timestamp) {
+    public Sensors(int id, float tempurature, float humidity, float soilmoaster, float windSpeed, float x, float y, double timestamp) {
 
         this.id = id;
         this.tempurature = tempurature;
@@ -114,11 +114,11 @@ public class Sensors {
         this.y = y;
     }
 
-    public String getTimestamp() {
+    public double getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(double timestamp) {
         this.timestamp = timestamp;
     }
 }
