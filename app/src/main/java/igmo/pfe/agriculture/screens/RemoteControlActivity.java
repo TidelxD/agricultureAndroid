@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -32,7 +33,7 @@ public class RemoteControlActivity extends AppCompatActivity {
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch moteur ;
     private RecyclerView rcv ;
-
+    private ImageView backButton;
     private JsonHandler jsonHandler;
     // User DATA
     private SplashScreen inst = SplashScreen.getInst();
@@ -46,6 +47,14 @@ public class RemoteControlActivity extends AppCompatActivity {
         setContentView(R.layout.activity_remote_control);
 
         moteur = findViewById(R.id.moteurStateSwitch);
+        backButton = findViewById(R.id.backButton);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Constans.NODEJS_ROOT_URL)
                 .addConverterFactory(GsonConverterFactory.create()).build();

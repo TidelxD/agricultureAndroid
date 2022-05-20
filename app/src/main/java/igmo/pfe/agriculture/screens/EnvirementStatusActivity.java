@@ -6,8 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import igmo.pfe.agriculture.Constans;
 import igmo.pfe.agriculture.MainActivity;
@@ -27,6 +33,7 @@ public class EnvirementStatusActivity extends AppCompatActivity {
     // User DATA
     private SplashScreen inst = SplashScreen.getInst();
     private User UserData =inst.getUserData();
+    private ImageView backButton;
 
     private TextView tempValue,humiValue,WindValue,soilValue,timesValue;
 
@@ -36,6 +43,14 @@ public class EnvirementStatusActivity extends AppCompatActivity {
         setContentView(R.layout.activity_envirement_status);
 
         init ();
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Constans.NODEJS_ROOT_URL)
                 .addConverterFactory(GsonConverterFactory.create()).build();
@@ -60,7 +75,10 @@ public class EnvirementStatusActivity extends AppCompatActivity {
                 humiValue.setText(response.body().getHumidity()+"%");
                 WindValue.setText(response.body().getWindSpeed()+"km/h");
                 soilValue.setText(response.body().getSoilmoaster()+"%");
-                timesValue.setText(response.body().getTimestamp()+"");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyy", Locale.FRANCE);
+                String Sdate = dateFormat.format(new Date(response.body().getTimestamp()));
+
+                timesValue.setText(Sdate);
 
 
             }
@@ -82,6 +100,9 @@ public class EnvirementStatusActivity extends AppCompatActivity {
         WindValue=findViewById(R.id.WindValue);
         soilValue=findViewById(R.id.soilValue);
         timesValue=findViewById(R.id.timesValue);
+        backButton = findViewById(R.id.backButton);
+
+
 
     }
 }

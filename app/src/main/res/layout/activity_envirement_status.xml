@@ -8,17 +8,26 @@
     android:background="#E8E5E5"
     tools:context=".screens.DashboardActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="220dp"
         android:background="@drawable/interface_header_drawable"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent">
 
-
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:id="@+id/backButton"
+            android:src="@drawable/ic_arrow_back" />
+
+        <TextView
+            android:id="@+id/Hifarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/roboto_medium"
@@ -29,17 +38,22 @@
 
 
         <ImageView
+            android:id="@+id/farmIcon"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:layout_marginTop="24dp"
+            android:layout_below="@+id/Hifarm"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
+            android:layout_marginTop="24dp"
             android:src="@drawable/ic_plant"
             app:tint="#fff" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-           android:layout_gravity="center"
+            android:layout_below="@+id/farmIcon"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto_medium"
             android:text="Environment State"
@@ -47,7 +61,7 @@
             android:textSize="18sp" />
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
       <androidx.cardview.widget.CardView
           android:layout_width="match_parent"

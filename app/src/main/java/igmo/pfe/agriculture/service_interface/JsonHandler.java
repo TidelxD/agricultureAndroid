@@ -33,4 +33,9 @@ public interface JsonHandler {
 
     @GET("getLastDataSensors")
     Call<Sensors>getLastSendors(@Header("Authorization") String token);
+
+    @GET("getChartDataSensors")
+    Call<List<Sensors>>getChartDataSensors(@Header("Authorization") String token);
+
+    ///api/getChartDataSensors
 }

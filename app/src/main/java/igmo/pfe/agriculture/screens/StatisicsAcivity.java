@@ -1,30 +1,34 @@
 package igmo.pfe.agriculture.screens;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
-
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import igmo.pfe.agriculture.Constans;
 import igmo.pfe.agriculture.R;
-import igmo.pfe.agriculture.models.Actutors;
 import igmo.pfe.agriculture.models.Sensors;
 import igmo.pfe.agriculture.models.User;
 import igmo.pfe.agriculture.service_interface.JsonHandler;
@@ -38,24 +42,36 @@ public class StatisicsAcivity extends AppCompatActivity {
 
 
     private LineChart lineChart;
-    private LineDataSet line_data_set = new LineDataSet(null,null);
+    private LineDataSet line_data_set = new LineDataSet(null, null);
     private ArrayList<ILineDataSet> LDSAL = new ArrayList<>();
+    private ImageView backButton;
+
     LineData lineData;
 
     // API Handler
     private JsonHandler jsonHandler;
     // User DATA
     private SplashScreen inst = SplashScreen.getInst();
-    private User UserData =inst.getUserData();
-    private Sensors helper ;
-    ArrayList<String> xAxies = new ArrayList<>();
+    private User UserData = inst.getUserData();
+    private ArrayList<Sensors> helper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statisics_acivity);
 
-        lineChart=findViewById(R.id.lineChart);
+        lineChart = findViewById(R.id.lineChart);
+        backButton = findViewById(R.id.backButton);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+
 
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Constans.NODEJS_ROOT_URL)
@@ -63,53 +79,39 @@ public class StatisicsAcivity extends AppCompatActivity {
 
         jsonHandler = retrofit.create(JsonHandler.class);
 
-        Call<Sensors> call = jsonHandler.getLastSendors("Bearer "+UserData.getToken());
+        Call<List<Sensors>> call = jsonHandler.getChartDataSensors("Bearer " + UserData.getToken());
 
-        call.enqueue(new Callback<Sensors>() {
+        call.enqueue(new Callback<List<Sensors>>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
-            public void onResponse(@NonNull Call<Sensors> call, @NonNull Response<Sensors> response) {
-                if(!response.isSuccessful()){
-                    Log.e("NotSuccessful ",response.message());
+            public void onResponse(@NonNull Call<List<Sensors>> call, @NonNull Response<List<Sensors>> response) {
+                if (!response.isSuccessful()) {
+                    Log.e("NotSuccessful ", response.message());
                     Toast.makeText(StatisicsAcivity.this, response.message(), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 ArrayList<Entry> dataVals = new ArrayList<>();
-                helper = response.body();
-                assert helper != null;
+                helper = (ArrayList<Sensors>) response.body();
+                int x = helper.size();
+                Log.e("helper", "size: " + helper.size());
+                for (int i = 0; i < (helper != null ? helper.size() : 0); i++) {
+
+                    float Xnew = helper.get(i).getTimestamp() - helper.get(0).getTimestamp();
+                    Log.d("timesSpat", ": " + helper.get(i).getId());
+                    Log.d("timesSpat", ": " + helper.get(i).getTimestamp());
+                    dataVals.add(0, new Entry(Xnew, helper.get(i).getTempurature()));
+                    Log.d("dataVals", ": " + dataVals.get(i).getX() + "");
 
 
-
-                Date date = new Date((long) helper.getTimestamp());
-                @SuppressLint("SimpleDateFormat")
-                SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
-                String dates = sdf.format(date);
-                Log.e("dates","dates: "+dates);
-
-                dataVals.add(new Entry(123456,20));
-                xAxies.add(dates);
-                dataVals.add(new Entry(123459,helper.getTempurature()));
-                xAxies.add(dates);
-                dataVals.add(new Entry(123462,50));
-                xAxies.add(dates);
-//                @SuppressLint("SimpleDateFormat") final Timestamp timestamp2 =
-//                        Timestamp.valueOf(
-//                                new SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
-//                                        .format(new Date()) // get the current date as String
-//                                        .concat("04-09-2022 13:51:00"));        // and append the time
-//                long TMS2 = Long.parseLong(timestamp2.toString());
-//                Log.e("TMS2","TMS2: "+TMS2);
-                dataVals.add(new Entry(123465,19));
-                xAxies.add(dates);
-                dataVals.add(new Entry(123468,60));
-                xAxies.add(dates);
-
+                }
                 showChart(dataVals);
+
             }
 
             @Override
-            public void onFailure(@NonNull Call<Sensors> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<List<Sensors>> call, @NonNull Throwable t) {
                 Toast.makeText(StatisicsAcivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.e("onFailure",t.getMessage());
+                Log.e("onFailure", t.getMessage());
             }
         });
 
@@ -117,27 +119,69 @@ public class StatisicsAcivity extends AppCompatActivity {
     }
 
 
-    private void showChart(ArrayList<Entry> dataVals){
+    private void showChart(ArrayList<Entry> dataVals) {
         line_data_set.setValues(dataVals);
         line_data_set.setLabel("TemperatureSet");
         LDSAL.clear();
+
+        line_data_set.setValueFormatter(new MyValueFormatter());
+
+        XAxis XAxs = lineChart.getXAxis();
+        XAxs.setValueFormatter(new MyAxiesFormatter());
+        XAxs.setPosition(XAxis.XAxisPosition.BOTTOM);
+        XAxs.setDrawGridLines(true);
+        XAxs.setLabelRotationAngle(90);
+
         LDSAL.add(line_data_set);
-        lineData= new LineData(LDSAL);
+        lineData = new LineData(LDSAL);
 
-        XAxis xAxis = lineChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setDrawGridLines(false);
-
-        //String setter in x-Axis
-        xAxis.setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(xAxies));
-        xAxis.setGranularity(1f);
-        xAxis.setLabelCount(xAxies.size());
-        xAxis.setGranularityEnabled(true);
 
         lineChart.clear();
-        lineChart.setBorderWidth(4);
+        lineChart.setNoDataTextColor(Color.GREEN);
+        lineChart.setBorderWidth(2);
+        lineChart.setDrawBorders(true);
+        Description description = new Description();
+        description.setText("Temperature");
+        description.setTextSize(10);
+        description.setTextColor(Color.BLUE);
+        lineChart.setDescription(description);
         lineChart.setData(lineData);
         lineChart.invalidate();
 
     }
+
+
+    // Creating Class For Formatting Data Sets
+    public class MyValueFormatter extends ValueFormatter {
+
+
+        @Override
+        public String getFormattedValue(float value) {
+            return value + "°C";
+        }
+
+
+    }
+
+    public class MyAxiesFormatter extends ValueFormatter {
+
+
+        @Override
+        public String getFormattedValue(float value) {
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss", Locale.FRANCE);
+            String Sdate = dateFormat.format(new Date((long) value));
+
+            return Sdate;
+
+
+        }
+
+
+    }
+
+    /*
+     *
+
+     *  */
 }
