@@ -1,6 +1,7 @@
 package igmo.pfe.agriculture.screens;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
@@ -42,6 +44,7 @@ public class StatisicsAcivity extends AppCompatActivity {
 
 
     private LineChart lineChart;
+
     private LineDataSet line_data_set = new LineDataSet(null, null);
     private ArrayList<ILineDataSet> LDSAL = new ArrayList<>();
     private ImageView backButton;
@@ -135,11 +138,19 @@ public class StatisicsAcivity extends AppCompatActivity {
         LDSAL.add(line_data_set);
         lineData = new LineData(LDSAL);
 
+        // Cubic lines
+        line_data_set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        line_data_set.setDrawFilled(true);
+        Drawable drawable = ContextCompat.getDrawable(this, R.drawable.fil_tempurature_gradiant);
+        line_data_set.setFillDrawable(drawable);
 
         lineChart.clear();
         lineChart.setNoDataTextColor(Color.GREEN);
         lineChart.setBorderWidth(2);
-        lineChart.setDrawBorders(true);
+        lineChart.getXAxis().setDrawGridLines(false);
+        lineChart.getAxisLeft().setDrawGridLines(false);
+        lineChart.getAxisRight().setDrawGridLines(false);
+
         Description description = new Description();
         description.setText("Temperature");
         description.setTextSize(10);
