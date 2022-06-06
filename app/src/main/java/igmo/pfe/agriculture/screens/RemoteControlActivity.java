@@ -31,7 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RemoteControlActivity extends AppCompatActivity {
 
     @SuppressLint("UseSwitchCompatOrMaterialCode")
-    private Switch moteur ;
+    private Switch moteur,type2StateSwitch ;
     private RecyclerView rcv ;
     private ImageView backButton;
     private JsonHandler jsonHandler;
@@ -47,6 +47,7 @@ public class RemoteControlActivity extends AppCompatActivity {
         setContentView(R.layout.activity_remote_control);
 
         moteur = findViewById(R.id.moteurStateSwitch);
+        type2StateSwitch = findViewById(R.id.type2StateSwitch);
         backButton = findViewById(R.id.backButton);
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +81,15 @@ public class RemoteControlActivity extends AppCompatActivity {
                     moteur.setText("ON");
                     moteur.setTextColor(Color.GREEN);
                     moteur.setChecked(true);
+                }
+                if(helper.get(1).getState()==0){
+                    type2StateSwitch.setText("OFF");
+                    type2StateSwitch.setTextColor(Color.RED);
+                    type2StateSwitch.setChecked(false);
+                }else{
+                    type2StateSwitch.setText("ON");
+                    type2StateSwitch.setTextColor(Color.GREEN);
+                    type2StateSwitch.setChecked(true);
                 }
 
             }

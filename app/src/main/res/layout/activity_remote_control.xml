@@ -137,7 +137,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/roboto"
-                    android:text="Moteur"
+                    android:text="Moteur 1"
                     android:textSize="18dp" />
 
                 <Switch
@@ -172,7 +172,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/roboto"
-                    android:text="Actutor "
+                    android:text="Moteur 2"
                     android:textSize="18dp" />
 
                 <Switch
