@@ -33,7 +33,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/roboto_medium"
-            android:text="Suga Marketing Farm"
+            android:text="@string/kechar_Benseddik"
             android:textColor="#FFF"
             android:textSize="20sp" />
 

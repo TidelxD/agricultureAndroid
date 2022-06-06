@@ -12,13 +12,11 @@ import igmo.pfe.agriculture.models.User;
 
 public class SplashScreen extends AppCompatActivity {
 
+
+    // Instace Static ychad ga3 Data nta3 l USER f kamel lAPP
     public static SplashScreen inst ;
-
     public SplashScreen (){ inst=this; }
-
-
      private User userData ;
-
     public static SplashScreen getInst(){
         return inst;
     }
@@ -29,6 +27,8 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
+
+        // Post Handler  Method Predifinie  f android t'executer l code ba3d certain seconds
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -42,6 +42,7 @@ public class SplashScreen extends AppCompatActivity {
     }
 
 
+    // Setter w Getter nta3 l USER DATA
     public User getUserData() {
         return userData;
     }

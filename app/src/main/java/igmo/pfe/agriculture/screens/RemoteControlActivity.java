@@ -45,10 +45,11 @@ public class RemoteControlActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remote_control);
-
         moteur = findViewById(R.id.moteurStateSwitch);
         type2StateSwitch = findViewById(R.id.type2StateSwitch);
         backButton = findViewById(R.id.backButton);
+
+
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +65,10 @@ public class RemoteControlActivity extends AppCompatActivity {
         Log.e("token", UserData.getToken());
         Call<List<Actutors>> call = jsonHandler.getLastActutor("Bearer "+UserData.getToken());
 
+
+
+
+
         call.enqueue(new Callback<List<Actutors>>() {
             @Override
             public void onResponse(@NonNull Call<List<Actutors>> call, @NonNull Response<List<Actutors>> response) {
@@ -72,7 +77,9 @@ public class RemoteControlActivity extends AppCompatActivity {
                     Toast.makeText(RemoteControlActivity.this, response.message(), Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 helper = (ArrayList<Actutors>) response.body();
+
                 if(helper.get(0).getState()==0){
                     moteur.setText("OFF");
                     moteur.setTextColor(Color.RED);
@@ -101,23 +108,56 @@ public class RemoteControlActivity extends AppCompatActivity {
             }
         });
 
+        // ON Click Listener
         moteur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if(moteur.isChecked()){
+                    // ILa Cha3alt l Moteur ( switch on )
                     moteur.setText("ON");
+                    // Text YRodah GREEN
                     moteur.setTextColor(Color.GREEN);
+                    // y Updatih l actutor f DATABASE
                     updateActutor();
 
                 }else {
+                    // Ila tafit l Moter ( switch off )
                     moteur.setText("OFF");
+                    // text yrodah RED
                     moteur.setTextColor(Color.RED);
+                    // yupdati l actutor f DATABSE
+                    updateActutor();
+
+                }
+            }
+        });
+
+        type2StateSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(type2StateSwitch.isChecked()){
+                    // ILa Cha3alt l Moteur ( switch on )
+                    type2StateSwitch.setText("ON");
+                    // Text YRodah GREEN
+                    type2StateSwitch.setTextColor(Color.GREEN);
+                    // y Updatih l actutor f DATABASE
+                    updateActutor();
+
+                }else {
+                    // Ila tafit l Moter ( switch off )
+                    type2StateSwitch.setText("OFF");
+                    // text yrodah RED
+                    type2StateSwitch.setTextColor(Color.RED);
+                    // yupdati l actutor f DATABSE
                     updateActutor();
 
                 }
             }
         });
     }
+
+
 
     private void updateActutor(){
 

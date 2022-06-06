@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_medium"
-            android:text="Suga Marketing Farm"
+            android:text="@string/kechar_Benseddik"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:textColor="#FFF"

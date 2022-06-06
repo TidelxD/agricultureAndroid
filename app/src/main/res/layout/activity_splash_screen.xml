@@ -24,4 +24,15 @@
         android:layout_marginTop="100dp"
         android:indeterminateTint="#FFF"/>
 
+    <TextView
+        android:id="@+id/acturs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:text="Kechar Zakaria et Benseddik sarra"
+        android:layout_marginBottom="24dp"
+        android:textColor="#fff"
+        android:textSize="18sp" />
+
 </RelativeLayout>

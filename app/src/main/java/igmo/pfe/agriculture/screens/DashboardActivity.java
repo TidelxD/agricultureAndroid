@@ -10,12 +10,15 @@ import android.view.View;
 import igmo.pfe.agriculture.R;
 
 public class DashboardActivity extends AppCompatActivity {
+
+    // Components USED
      private CardView Environment,RemoteControll,StatisticsActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        // Initialization
         Environment=findViewById(R.id.Environment);
         RemoteControll=findViewById(R.id.Remote);
         StatisticsActivity=findViewById(R.id.StatisticsActivity);
