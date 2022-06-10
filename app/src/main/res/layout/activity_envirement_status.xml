@@ -120,6 +120,7 @@
                   android:padding="4dp"
                   android:layout_marginStart="16dp"
                   android:layout_marginEnd="16dp"
+                  android:id="@+id/tempLinear"
                   android:layout_marginTop="8dp"
                   android:orientation="horizontal">
 
@@ -155,6 +156,7 @@
                   android:padding="4dp"
                   android:layout_marginStart="16dp"
                   android:layout_marginEnd="16dp"
+                  android:id="@+id/humiLinear"
                   android:layout_marginTop="8dp"
                   android:orientation="horizontal">
 
@@ -191,6 +193,7 @@
                   android:layout_marginStart="16dp"
                   android:layout_marginEnd="16dp"
                   android:layout_marginTop="8dp"
+                  android:id="@+id/windLinear"
                   android:orientation="horizontal">
 
                   <ImageView
@@ -224,6 +227,7 @@
                   android:padding="4dp"
                   android:layout_marginStart="16dp"
                   android:layout_marginEnd="16dp"
+                  android:id="@+id/soilLinear"
                   android:layout_marginTop="8dp"
                   android:orientation="horizontal">
 

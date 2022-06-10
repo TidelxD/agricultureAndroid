@@ -58,6 +58,9 @@ public class StatisicsAcivity extends AppCompatActivity {
     private User UserData = inst.getUserData();
     private ArrayList<Sensors> helper;
 
+    private int state;
+    private String stateName="Temperature";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +69,8 @@ public class StatisicsAcivity extends AppCompatActivity {
 
         lineChart = findViewById(R.id.lineChart);
         backButton = findViewById(R.id.backButton);
+
+        state=getIntent().getIntExtra("stat",0);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,10 +105,34 @@ public class StatisicsAcivity extends AppCompatActivity {
                 for (int i = 0; i < (helper != null ? helper.size() : 0); i++) {
 
                     float Xnew = helper.get(i).getTimestamp() - helper.get(0).getTimestamp();
-                    Log.d("timesSpat", ": " + helper.get(i).getId());
-                    Log.d("timesSpat", ": " + helper.get(i).getTimestamp());
-                    dataVals.add(0, new Entry(Xnew, helper.get(i).getTempurature()));
-                    Log.d("dataVals", ": " + dataVals.get(i).getX() + "");
+
+
+                      switch (state){
+                          case 0 :
+                              dataVals.add(0, new Entry(Xnew, helper.get(i).getTempurature()));
+                              break;
+
+                          case 1:
+                              dataVals.add(0, new Entry(Xnew, helper.get(i).getHumidity()));
+                              stateName = "Humidity";
+                              break;
+
+                          case 2:
+                              dataVals.add(0, new Entry(Xnew, helper.get(i).getWindSpeed()));
+                              stateName = "WindSpeed";
+                              break;
+
+                          case 3:
+                              dataVals.add(0, new Entry(Xnew, helper.get(i).getSoilmoaster()));
+                              stateName = "SoilMoister";
+                              break;
+
+
+                      }
+
+
+
+
 
 
                 }
@@ -124,7 +153,7 @@ public class StatisicsAcivity extends AppCompatActivity {
 
     private void showChart(ArrayList<Entry> dataVals) {
         line_data_set.setValues(dataVals);
-        line_data_set.setLabel("TemperatureSet");
+        line_data_set.setLabel(stateName);
         LDSAL.clear();
 
         line_data_set.setValueFormatter(new MyValueFormatter());
@@ -151,11 +180,11 @@ public class StatisicsAcivity extends AppCompatActivity {
         lineChart.getAxisLeft().setDrawGridLines(false);
         lineChart.getAxisRight().setDrawGridLines(false);
 
-        Description description = new Description();
-        description.setText("Temperature");
-        description.setTextSize(10);
-        description.setTextColor(Color.BLUE);
-        lineChart.setDescription(description);
+//        Description description = new Description();
+//        description.setText(stateName);
+//        description.setTextSize(10);
+//        description.setTextColor(Color.BLUE);
+//        lineChart.setDescription(description);
         lineChart.setData(lineData);
         lineChart.invalidate();
 

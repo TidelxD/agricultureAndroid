@@ -1,10 +1,12 @@
 package igmo.pfe.agriculture.screens;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +37,7 @@ public class EnvirementStatusActivity extends AppCompatActivity {
     private ImageView backButton;
 
     private TextView tempValue, humiValue, WindValue, soilValue, timesValue;
+    private LinearLayout tempLinear, humiLinear, winsLinear, soilLinear ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +97,39 @@ public class EnvirementStatusActivity extends AppCompatActivity {
             }
         });
 
+        tempLinear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EnvirementStatusActivity.this,StatisicsAcivity.class);
+                intent.putExtra("stat",0);
+                startActivity(intent);
+            }
+        });
+        humiLinear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EnvirementStatusActivity.this,StatisicsAcivity.class);
+                intent.putExtra("stat",1);
+                startActivity(intent);
+            }
+        });
+        winsLinear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EnvirementStatusActivity.this,StatisicsAcivity.class);
+                intent.putExtra("stat",2);
+                startActivity(intent);
+            }
+        });
+        soilLinear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EnvirementStatusActivity.this,StatisicsAcivity.class);
+                intent.putExtra("stat",3);
+                startActivity(intent);
+            }
+        });
+
     }
 
 
@@ -104,6 +140,11 @@ public class EnvirementStatusActivity extends AppCompatActivity {
         soilValue = findViewById(R.id.soilValue);
         timesValue = findViewById(R.id.timesValue);
         backButton = findViewById(R.id.backButton);
+        tempLinear = findViewById(R.id.tempLinear);
+        humiLinear = findViewById(R.id.humiLinear);
+        winsLinear = findViewById(R.id.windLinear);
+        soilLinear = findViewById(R.id.soilLinear);
+
 
 
     }

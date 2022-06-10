@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +41,9 @@ public class RemoteControlActivity extends AppCompatActivity {
     private User UserData =inst.getUserData();
     private ArrayList<Actutors> helper;
 
+    //
+    private ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,10 @@ public class RemoteControlActivity extends AppCompatActivity {
         moteur = findViewById(R.id.moteurStateSwitch);
         type2StateSwitch = findViewById(R.id.type2StateSwitch);
         backButton = findViewById(R.id.backButton);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("updating...");
+        progressDialog.setCancelable(false);
 
 
 
@@ -119,7 +127,7 @@ public class RemoteControlActivity extends AppCompatActivity {
                     // Text YRodah GREEN
                     moteur.setTextColor(Color.GREEN);
                     // y Updatih l actutor f DATABASE
-                    updateActutor();
+                    updateActutor(helper.get(0),1);
 
                 }else {
                     // Ila tafit l Moter ( switch off )
@@ -127,7 +135,7 @@ public class RemoteControlActivity extends AppCompatActivity {
                     // text yrodah RED
                     moteur.setTextColor(Color.RED);
                     // yupdati l actutor f DATABSE
-                    updateActutor();
+                    updateActutor(helper.get(0),0);
 
                 }
             }
@@ -142,7 +150,7 @@ public class RemoteControlActivity extends AppCompatActivity {
                     // Text YRodah GREEN
                     type2StateSwitch.setTextColor(Color.GREEN);
                     // y Updatih l actutor f DATABASE
-                    updateActutor();
+                    updateActutor(helper.get(1),1);
 
                 }else {
                     // Ila tafit l Moter ( switch off )
@@ -150,7 +158,7 @@ public class RemoteControlActivity extends AppCompatActivity {
                     // text yrodah RED
                     type2StateSwitch.setTextColor(Color.RED);
                     // yupdati l actutor f DATABSE
-                    updateActutor();
+                    updateActutor(helper.get(1),0);
 
                 }
             }
@@ -159,8 +167,29 @@ public class RemoteControlActivity extends AppCompatActivity {
 
 
 
-    private void updateActutor(){
+    private void updateActutor(Actutors helper,int state){
+            Call<Actutors> call = jsonHandler.updateActutor(UserData.getToken(),helper.getType(),helper.getX(),helper.getY(),state);
+        progressDialog.show();
+            call.enqueue(new Callback<Actutors>() {
+                @Override
+                public void onResponse(Call<Actutors> call, Response<Actutors> response) {
+                    if(!response.isSuccessful()){
+                        progressDialog.dismiss();
+                        Log.e("NotSuccessful ",response.message());
+                        Toast.makeText(RemoteControlActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    progressDialog.dismiss();
+                    Toast.makeText(RemoteControlActivity.this, "updated ! ", Toast.LENGTH_SHORT).show();
+                }
 
+                @Override
+                public void onFailure(Call<Actutors> call, Throwable t) {
+                    progressDialog.dismiss();
+                    Toast.makeText(RemoteControlActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("onFailure",t.getMessage());
+                }
+            });
 
     }
 
