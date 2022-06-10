@@ -24,8 +24,9 @@ public interface JsonHandler {
     @GET("getLastDataSensors")
     Call<Sensors> getLastData(@Header("Authorization") String token);
 
-    @POST("/UpdateStateIns/{type}/{x}/{y}/{state}")
-    Call<Actutors> updateActutor(@Header("Authorization") String token,@Path("type") int type,@Path("x") float x,@Path("y") float y
+    @POST("UpdateStateIns/{type}/{x}/{y}/{state}")
+    Call<Actutors> updateActutor(@Header("Authorization") String token,@Path("type") int type,@Path("x") float x
+            ,@Path("y") float y
             ,@Path("state") float state);
 
     @GET("getLastActutor")

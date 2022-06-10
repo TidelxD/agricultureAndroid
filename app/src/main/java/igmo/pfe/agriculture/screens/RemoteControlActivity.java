@@ -168,7 +168,7 @@ public class RemoteControlActivity extends AppCompatActivity {
 
 
     private void updateActutor(Actutors helper,int state){
-            Call<Actutors> call = jsonHandler.updateActutor(UserData.getToken(),helper.getType(),helper.getX(),helper.getY(),state);
+      Call<Actutors> call = jsonHandler.updateActutor("Bearer "+UserData.getToken(),helper.getType(),helper.getX(),helper.getY(),state);
         progressDialog.show();
             call.enqueue(new Callback<Actutors>() {
                 @Override
@@ -180,7 +180,7 @@ public class RemoteControlActivity extends AppCompatActivity {
                         return;
                     }
                     progressDialog.dismiss();
-                    Toast.makeText(RemoteControlActivity.this, "updated ! ", Toast.LENGTH_SHORT).show();
+
                 }
 
                 @Override
