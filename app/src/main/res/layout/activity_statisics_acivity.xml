@@ -31,7 +31,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/roboto_medium"
-            android:text="Hi Farm"
+            android:text="Smart Farm"
             android:textAlignment="center"
             android:textColor="#FFF"
             android:textSize="20sp" />

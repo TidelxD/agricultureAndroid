@@ -7,12 +7,15 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/smart_farm_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/smart_farm_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.Agriculture"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".HistoryActivity"
+            android:exported="false" />
         <activity
             android:name=".screens.StatisicsAcivity"
             android:exported="false" />

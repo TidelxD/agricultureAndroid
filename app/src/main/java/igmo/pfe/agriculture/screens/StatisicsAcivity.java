@@ -89,6 +89,8 @@ public class StatisicsAcivity extends AppCompatActivity {
 
         Call<List<Sensors>> call = jsonHandler.getChartDataSensors("Bearer " + UserData.getToken());
 
+
+
         call.enqueue(new Callback<List<Sensors>>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -106,10 +108,11 @@ public class StatisicsAcivity extends AppCompatActivity {
 
                     float Xnew = helper.get(i).getTimestamp() - helper.get(0).getTimestamp();
 
-
+                   // Get the Data from DB and specify wich type is it [ temperatue | HUmidity | WindSpeed | SoilMoister ]
                       switch (state){
                           case 0 :
                               dataVals.add(0, new Entry(Xnew, helper.get(i).getTempurature()));
+                              stateName = "Temperature";
                               break;
 
                           case 1:
@@ -136,6 +139,7 @@ public class StatisicsAcivity extends AppCompatActivity {
 
 
                 }
+                // Method pour design Statistics
                 showChart(dataVals);
 
             }
@@ -152,18 +156,26 @@ public class StatisicsAcivity extends AppCompatActivity {
 
 
     private void showChart(ArrayList<Entry> dataVals) {
+
+         // dataVals is a paramter that contains the Data of Xaxies and Yaxies
+        // line_data_ser is an object to allow us to formated the Data of statistics
         line_data_set.setValues(dataVals);
         line_data_set.setLabel(stateName);
+
         LDSAL.clear();
 
         line_data_set.setValueFormatter(new MyValueFormatter());
 
+
+        // XAxs to controll Xaxies
         XAxis XAxs = lineChart.getXAxis();
         XAxs.setValueFormatter(new MyAxiesFormatter());
         XAxs.setPosition(XAxis.XAxisPosition.BOTTOM);
         XAxs.setDrawGridLines(true);
         XAxs.setLabelRotationAngle(90);
 
+
+        // TLmaed ga3 les object m3a ba3d
         LDSAL.add(line_data_set);
         lineData = new LineData(LDSAL);
 
@@ -185,6 +197,7 @@ public class StatisicsAcivity extends AppCompatActivity {
 //        description.setTextSize(10);
 //        description.setTextColor(Color.BLUE);
 //        lineChart.setDescription(description);
+
         lineChart.setData(lineData);
         lineChart.invalidate();
 
@@ -197,7 +210,40 @@ public class StatisicsAcivity extends AppCompatActivity {
 
         @Override
         public String getFormattedValue(float value) {
-            return value + "°C";
+
+             String lastValue = value + "°C";
+
+
+            switch (state){
+                case 0 :
+                    lastValue= value + "°C";
+                    break;
+
+
+                case 1:
+                    stateName = "Humidity";
+                    lastValue =  value + "%";
+                    break;
+
+
+
+                case 2:
+                    stateName = "WindSpeed";
+                    lastValue =  value + "Km/h";
+                    break;
+
+
+
+                case 3:
+                    stateName = "SoilMoister";
+                    lastValue = value + "%";
+
+                    break;
+
+
+            }
+            return  lastValue;
+
         }
 
 

@@ -94,11 +94,11 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-//        if(password.length()<10){
-//            progressDialog.hide();
-//            passEdit.setError("Password should be 10 or more ! ");
-//            return;
-//        }
+        if(password.length()<10){
+            progressDialog.hide();
+            passEdit.setError("Password should be 10 or more ! ");
+            return;
+        }
 
         // Call Variable ychad lina ga3 DATA NTA3 requette wel Object li yetconverta lih JSON
         Call<User> call = jsonHandler.loginUser(email, password);

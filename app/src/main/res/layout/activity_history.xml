@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E8E5E5"
     android:orientation="vertical"
+    android:background="#E8E5E5"
     tools:context=".screens.DashboardActivity">
 
     <RelativeLayout
@@ -36,7 +36,6 @@
             android:textColor="#FFF"
             android:textSize="20sp" />
 
-
         <ImageView
             android:id="@+id/farmIcon"
             android:layout_width="75dp"
@@ -45,7 +44,7 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginTop="24dp"
-            android:src="@drawable/ic_smart_home"
+            android:src="@drawable/ic_history"
             app:tint="#fff" />
 
         <TextView
@@ -56,7 +55,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto_medium"
-            android:text="Remote Controle"
+            android:text="History"
             android:textColor="#FFF"
             android:textSize="18sp" />
 
@@ -67,9 +66,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="16dp"
-        android:padding="8dp"
+        app:cardElevation="5dp"
         app:cardCornerRadius="10dp"
-        app:cardElevation="5dp">
+        android:padding="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -79,143 +78,176 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="4dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:orientation="horizontal"
-                android:padding="4dp">
-
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
                 <TextView
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:text="History"
                     android:fontFamily="@font/roboto"
-                    android:text="Actutors"
                     android:textColor="#00C853"
-                    android:textSize="18sp" />
+                    android:layout_weight="1"
+                    android:textSize="18sp"/>
 
                 <TextView
                     android:id="@+id/timesValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
                     android:text=""
-                    android:textSize="18sp" />
+                    android:fontFamily="@font/roboto"
+                    android:textSize="18sp"/>
 
             </LinearLayout>
-
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:background="#000"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="2dp"
                 android:layout_marginEnd="8dp"
-                android:background="#B7807D7D" />
+                android:layout_marginTop="2dp"/>
 
-            <!-- Moteur -->
+            <!-- Temperature -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="4dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:orientation="horizontal"
-                android:padding="4dp">
+                android:id="@+id/tempLinear"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/ic_engine" />
+
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Moteur 1  ON "
                     android:layout_marginStart="8dp"
-                    android:layout_weight="1"
                     android:fontFamily="@font/roboto"
-                    android:text="Moteur 1"
-                    android:textSize="18dp" />
+                    android:textSize="18dp"
 
-                <Switch
-                    android:id="@+id/moteurStateSwitch"
-                    android:layout_width="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/tempValue"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="OFF"
-                    android:textColor="#D50000"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+                    android:text="19:25"
+                    android:textColor="#00C853"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="18sp"/>
 
             </LinearLayout>
-            <!-- Actutor Type 2 -->
+            <!-- Humidity -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="4dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:orientation="horizontal"
-                android:padding="4dp">
+                android:id="@+id/humiLinear"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/ic_engine" />
+
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Moteur 1 OFF"
                     android:layout_marginStart="8dp"
-                    android:layout_weight="1"
                     android:fontFamily="@font/roboto"
-                    android:text="Moteur 2"
-                    android:textSize="18dp" />
+                    android:textSize="18dp"
+                    android:layout_weight="1"/>
 
-                <Switch
-                    android:id="@+id/type2StateSwitch"
-                    android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/humiValue"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="OFF"
-                    android:textColor="#D50000"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+                    android:text="18:30"
+                    android:textColor="#00C853"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="18sp"/>
+
+
+            </LinearLayout>
+            <!-- WindSpeed -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
+                android:id="@+id/windLinear"
+                android:orientation="horizontal">
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Moteur 2 OFF"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="18dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/WindValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="09:55"
+                    android:textColor="#00C853"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="18sp"/>
+
+            </LinearLayout>
+            <!-- SoilMoister -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:id="@+id/soilLinear"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Moteur 2 ON"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="18dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/soilValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="09:23"
+                    android:textColor="#00C853"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="18sp"/>
 
             </LinearLayout>
 
-
-         <!--   <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
-                android:fontFamily="@font/roboto"
-                android:text="Last States"
-                android:textColor="#00C853"
-                android:textSize="18sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="8dp"
-                android:background="#B7807D7D" />
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerLastStateActutors"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp" /> -->
         </LinearLayout>
 
 
+
     </androidx.cardview.widget.CardView>
+
 
 
 </LinearLayout>

@@ -12,7 +12,7 @@ import igmo.pfe.agriculture.R;
 public class DashboardActivity extends AppCompatActivity {
 
     // Components USED
-     private CardView Environment,RemoteControll,StatisticsActivity;
+     private CardView Environment,RemoteControll,StatisticsActivity,HistoryCard;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +21,7 @@ public class DashboardActivity extends AppCompatActivity {
         // Initialization
         Environment=findViewById(R.id.Environment);
         RemoteControll=findViewById(R.id.Remote);
+        HistoryCard=findViewById(R.id.HistoryCard);
         StatisticsActivity=findViewById(R.id.StatisticsActivity);
 
         Environment.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +40,13 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(DashboardActivity.this,StatisicsAcivity.class));
+            }
+        });
+
+        HistoryCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardActivity.this,HistoryActivity.class));
             }
         });
 
