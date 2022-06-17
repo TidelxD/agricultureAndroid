@@ -36,8 +36,10 @@ public class EnvirementStatusActivity extends AppCompatActivity {
     private User UserData = inst.getUserData();
     private ImageView backButton;
 
+
+    // Components we used
     private TextView tempValue, humiValue, WindValue, soilValue, timesValue;
-    private LinearLayout tempLinear, humiLinear, winsLinear, soilLinear ;
+    private LinearLayout tempLinear, humiLinear, winsLinear, soilLinear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,8 @@ public class EnvirementStatusActivity extends AppCompatActivity {
             }
         });
 
-
+        // Retrofit Start = { Retrofit Biblio dir Connection bin App w DATABASE Using  URL OF L HOST [ CONSTANS.NODEJS_ROOT_URL]
+        // and GSON biblio = { TConvertilna  Data mn JSON l OBJECT }
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Constans.NODEJS_ROOT_URL)
                 .addConverterFactory(GsonConverterFactory.create()).build();
 
@@ -75,8 +78,7 @@ public class EnvirementStatusActivity extends AppCompatActivity {
                 }
 
 
-                Sensors helper = response.body();
-
+                // get the data from our response
                 tempValue.setText(response.body().getTempurature() + "°");
                 humiValue.setText(response.body().getHumidity() + "%");
                 WindValue.setText(response.body().getWindSpeed() + "km/h");
@@ -97,35 +99,37 @@ public class EnvirementStatusActivity extends AppCompatActivity {
             }
         });
 
+
+        // Going to statistic Activity   with the  value  of statistics
         tempLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EnvirementStatusActivity.this,StatisicsAcivity.class);
-                intent.putExtra("stat",0);
+                Intent intent = new Intent(EnvirementStatusActivity.this, StatisicsAcivity.class);
+                intent.putExtra("stat", 0);
                 startActivity(intent);
             }
         });
         humiLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EnvirementStatusActivity.this,StatisicsAcivity.class);
-                intent.putExtra("stat",1);
+                Intent intent = new Intent(EnvirementStatusActivity.this, StatisicsAcivity.class);
+                intent.putExtra("stat", 1);
                 startActivity(intent);
             }
         });
         winsLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EnvirementStatusActivity.this,StatisicsAcivity.class);
-                intent.putExtra("stat",2);
+                Intent intent = new Intent(EnvirementStatusActivity.this, StatisicsAcivity.class);
+                intent.putExtra("stat", 2);
                 startActivity(intent);
             }
         });
         soilLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EnvirementStatusActivity.this,StatisicsAcivity.class);
-                intent.putExtra("stat",3);
+                Intent intent = new Intent(EnvirementStatusActivity.this, StatisicsAcivity.class);
+                intent.putExtra("stat", 3);
                 startActivity(intent);
             }
         });
@@ -133,6 +137,7 @@ public class EnvirementStatusActivity extends AppCompatActivity {
     }
 
 
+    // method for initialize out components
     private void init() {
         tempValue = findViewById(R.id.tempValue);
         humiValue = findViewById(R.id.humiValue);
@@ -144,7 +149,6 @@ public class EnvirementStatusActivity extends AppCompatActivity {
         humiLinear = findViewById(R.id.humiLinear);
         winsLinear = findViewById(R.id.windLinear);
         soilLinear = findViewById(R.id.soilLinear);
-
 
 
     }

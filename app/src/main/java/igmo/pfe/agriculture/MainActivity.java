@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         // init method fiha kamel initialization ( findViewById )
         init();
 
-        // Retrofit Start = { Retrofit Biblio dir Connection bin App w DATABASE Using  URL NTA3 L HOST [ CONSTANS.NODEJS_ROOT_URL]
+        // Retrofit Start = { Retrofit Biblio dir Connection bin App w DATABASE Using  URL OF L HOST [ CONSTANS.NODEJS_ROOT_URL]
          // and GSON biblio = { TConvertilna  Data mn JSON l OBJECT }
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Constans.NODEJS_ROOT_URL)
                 .addConverterFactory(GsonConverterFactory.create()).build();

@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -59,7 +58,7 @@ public class StatisicsAcivity extends AppCompatActivity {
     private ArrayList<Sensors> helper;
 
     private int state;
-    private String stateName="Temperature";
+    private String stateName = "Temperature";
 
 
     @Override
@@ -70,7 +69,7 @@ public class StatisicsAcivity extends AppCompatActivity {
         lineChart = findViewById(R.id.lineChart);
         backButton = findViewById(R.id.backButton);
 
-        state=getIntent().getIntExtra("stat",0);
+        state = getIntent().getIntExtra("stat", 0);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,15 +79,14 @@ public class StatisicsAcivity extends AppCompatActivity {
         });
 
 
-
-
+        // Retrofit Start = { Retrofit Biblio dir Connection bin App w DATABASE Using  URL OF L HOST [ CONSTANS.NODEJS_ROOT_URL]
+        // and GSON biblio = { TConvertilna  Data mn JSON l OBJECT }
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Constans.NODEJS_ROOT_URL)
                 .addConverterFactory(GsonConverterFactory.create()).build();
 
         jsonHandler = retrofit.create(JsonHandler.class);
 
         Call<List<Sensors>> call = jsonHandler.getChartDataSensors("Bearer " + UserData.getToken());
-
 
 
         call.enqueue(new Callback<List<Sensors>>() {
@@ -108,34 +106,30 @@ public class StatisicsAcivity extends AppCompatActivity {
 
                     float Xnew = helper.get(i).getTimestamp() - helper.get(0).getTimestamp();
 
-                   // Get the Data from DB and specify wich type is it [ temperatue | HUmidity | WindSpeed | SoilMoister ]
-                      switch (state){
-                          case 0 :
-                              dataVals.add(0, new Entry(Xnew, helper.get(i).getTempurature()));
-                              stateName = "Temperature";
-                              break;
+                    // Get the Data from DB and specify wich type is it [ temperatue | HUmidity | WindSpeed | SoilMoister ]
+                    switch (state) {
+                        case 0:
+                            dataVals.add(0, new Entry(Xnew, helper.get(i).getTempurature()));
+                            stateName = "Temperature";
+                            break;
 
-                          case 1:
-                              dataVals.add(0, new Entry(Xnew, helper.get(i).getHumidity()));
-                              stateName = "Humidity";
-                              break;
+                        case 1:
+                            dataVals.add(0, new Entry(Xnew, helper.get(i).getHumidity()));
+                            stateName = "Humidity";
+                            break;
 
-                          case 2:
-                              dataVals.add(0, new Entry(Xnew, helper.get(i).getWindSpeed()));
-                              stateName = "WindSpeed";
-                              break;
+                        case 2:
+                            dataVals.add(0, new Entry(Xnew, helper.get(i).getWindSpeed()));
+                            stateName = "WindSpeed";
+                            break;
 
-                          case 3:
-                              dataVals.add(0, new Entry(Xnew, helper.get(i).getSoilmoaster()));
-                              stateName = "SoilMoister";
-                              break;
-
-
-                      }
+                        case 3:
+                            dataVals.add(0, new Entry(Xnew, helper.get(i).getSoilmoaster()));
+                            stateName = "SoilMoister";
+                            break;
 
 
-
-
+                    }
 
 
                 }
@@ -157,7 +151,7 @@ public class StatisicsAcivity extends AppCompatActivity {
 
     private void showChart(ArrayList<Entry> dataVals) {
 
-         // dataVals is a paramter that contains the Data of Xaxies and Yaxies
+        // dataVals is a paramter that contains the Data of Xaxies and Yaxies
         // line_data_ser is an object to allow us to formated the Data of statistics
         line_data_set.setValues(dataVals);
         line_data_set.setLabel(stateName);
@@ -185,6 +179,8 @@ public class StatisicsAcivity extends AppCompatActivity {
         Drawable drawable = ContextCompat.getDrawable(this, R.drawable.fil_tempurature_gradiant);
         line_data_set.setFillDrawable(drawable);
 
+
+        // control Xaxies
         lineChart.clear();
         lineChart.setNoDataTextColor(Color.GREEN);
         lineChart.setBorderWidth(2);
@@ -211,27 +207,25 @@ public class StatisicsAcivity extends AppCompatActivity {
         @Override
         public String getFormattedValue(float value) {
 
-             String lastValue = value + "°C";
+            String lastValue = value + "°C";
 
-
-            switch (state){
-                case 0 :
-                    lastValue= value + "°C";
+            // Formatin the type of each Data ( temperature / humidity / soilmoaster / windspeed ) }
+            switch (state) {
+                case 0:
+                    lastValue = value + "°C";
                     break;
 
 
                 case 1:
                     stateName = "Humidity";
-                    lastValue =  value + "%";
+                    lastValue = value + "%";
                     break;
-
 
 
                 case 2:
                     stateName = "WindSpeed";
-                    lastValue =  value + "Km/h";
+                    lastValue = value + "Km/h";
                     break;
-
 
 
                 case 3:
@@ -242,7 +236,7 @@ public class StatisicsAcivity extends AppCompatActivity {
 
 
             }
-            return  lastValue;
+            return lastValue;
 
         }
 
@@ -254,7 +248,7 @@ public class StatisicsAcivity extends AppCompatActivity {
 
         @Override
         public String getFormattedValue(float value) {
-
+            // fomrating the time from timstamp to HH:mm:ss
             SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss", Locale.FRANCE);
             String Sdate = dateFormat.format(new Date((long) value));
 

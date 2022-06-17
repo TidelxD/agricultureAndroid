@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Agriculture"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".HistoryActivity"
+            android:name=".screens.HistoryActivity"
             android:exported="false" />
         <activity
             android:name=".screens.StatisicsAcivity"
